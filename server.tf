@@ -1,5 +1,5 @@
 provider "aws" {
-    version = "~> 1.7"   
+    version = "~> 1.7"
     region = "ap-southeast-2"
 }
 
@@ -12,7 +12,7 @@ data "aws_ami" "ubuntu" {
     }
     filter {
         name = "root-device-type"
-        values = ["ebs"] 
+        values = ["ebs"]
     }
     filter {
         name = "name"
@@ -58,4 +58,3 @@ resource "aws_instance" "factorio" {
     }
     user_data = "${file("run_factorio.yaml")}"
 }
-
