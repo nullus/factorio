@@ -1,0 +1,8 @@
+#cloud-config
+---
+package_upgrade: true
+packages:
+- docker.io
+runcmd:
+- ["docker", "pull", "nullus/factorio:0.15.40"]
+- ["docker", "run", "--rm", "-p", "34197:34197/udp", "nullus/factorio:0.15.40"]
