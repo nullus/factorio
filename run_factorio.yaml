@@ -4,5 +4,6 @@ package_upgrade: true
 packages:
 - docker.io
 runcmd:
-- ["docker", "pull", "nullus/factorio:0.15.40"]
-- ["docker", "run", "--rm", "-p", "34197:34197/udp", "nullus/factorio:0.15.40"]
+- ["docker", "pull", "nullus/factorio:latest"]
+- ["docker", "run", "--rm", "-v", "/var/tmp:/factorio/saves", "nullus/factorio:latest", "/factorio/bin/x64/factorio", "--create", "factorio/saves/allthethings.zip"]
+- ["docker", "run", "--rm", "-p", "34197:34197/udp", "-v", "/var/tmp:/factorio/saves", "nullus/factorio:latest"]

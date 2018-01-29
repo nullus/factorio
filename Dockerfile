@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get -y install curl
 RUN apt-get -y install xz-utils
 
-ENV FACTORIO_URL=https://www.factorio.com/get-download/0.15.40/headless/linux64
+ENV FACTORIO_URL=https://www.factorio.com/get-download/0.16.20/headless/linux64
 
 WORKDIR /
 RUN curl -L -o - $FACTORIO_URL | tar -xJf -
@@ -13,9 +13,9 @@ RUN curl -L -o - $FACTORIO_URL | tar -xJf -
 COPY server-settings.json factorio/data/server-settings.json
 
 # Generate map
-RUN factorio/bin/x64/factorio --create factorio/bootstrap.zip
+# RUN factorio/bin/x64/factorio --create factorio/saves/allthethings.zip
 
-FROM scratch 
+FROM scratch
 
 COPY --from=build /lib/x86_64-linux-gnu/libpthread.so.0 \
     /lib/x86_64-linux-gnu/librt.so.1 \
@@ -34,5 +34,5 @@ COPY --from=build /factorio /factorio/
 
 EXPOSE 34197:34197/udp
 
-CMD ["factorio/bin/x64/factorio", "--server-settings", "factorio/data/server-settings.json", "--start-server", "factorio/bootstrap.zip"]
+CMD ["factorio/bin/x64/factorio", "--server-settings", "factorio/data/server-settings.json", "--start-server", "factorio/saves/allthethings"]
 
