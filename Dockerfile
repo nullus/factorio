@@ -1,11 +1,11 @@
-FROM ubuntu:latest AS build
+FROM ubuntu:xenial-20200706 AS build
 LABEL maintainer="Dylan Perry <dylan.perry@gmail.com>"
 
 RUN apt-get update
 RUN apt-get -y install curl
 RUN apt-get -y install xz-utils
 
-ENV FACTORIO_URL=https://www.factorio.com/get-download/0.16.20/headless/linux64
+ENV FACTORIO_URL=https://www.factorio.com/get-download/0.18.47/headless/linux64
 
 WORKDIR /
 RUN curl -L -o - $FACTORIO_URL | tar -xJf -
@@ -13,7 +13,7 @@ RUN curl -L -o - $FACTORIO_URL | tar -xJf -
 COPY server-settings.json factorio/data/server-settings.json
 
 # Generate map
-# RUN factorio/bin/x64/factorio --create factorio/saves/allthethings.zip
+RUN factorio/bin/x64/factorio --create factorio/saves/allthethings.zip
 
 FROM scratch
 
